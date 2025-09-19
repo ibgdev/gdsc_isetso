@@ -1,15 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
-  imports: [],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.scss'
+  styleUrls: ['./navbar.scss']
 })
 export class Navbar {
   isMobileMenuOpen = false;
+  isScrolled = false;
 
-  toggleMobileMenu(): void {
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    // Add scrolled class when page is scrolled more than 50px
+    this.isScrolled = window.scrollY > 50;
+  }
+
+  toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMenu() {
+    this.isMobileMenuOpen = false;
   }
 }

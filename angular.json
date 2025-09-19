@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "first_project": {
+    "gdsc_isetso": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "first_project:build:production"
+              "buildTarget": "gdsc_isetso:build:production"
             },
             "development": {
-              "buildTarget": "first_project:build:development"
+              "buildTarget": "gdsc_isetso:build:development"
             }
           },
           "defaultConfiguration": "development"
