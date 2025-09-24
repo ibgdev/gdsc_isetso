@@ -1,14 +1,14 @@
-  <section class="hero">
-    <div class="floating-circles">
-      <div class="circle circle-red"></div>
-      <div class="circle circle-blue"></div>
-      <div class="circle circle-green"></div>
-      <div class="circle circle-yellow"></div>
+  <section class="hero" #heroSection>
+    <div class="floating-circles animate-on-load">
+      <div class="circle circle-red animate-float-1"></div>
+      <div class="circle circle-blue animate-float-2"></div>
+      <div class="circle circle-green animate-float-3"></div>
+      <div class="circle circle-yellow animate-float-4"></div>
     </div>
-    <div class="hero-content">
-      <h1>Building the Future of <span class="gradient-text">Technology Together</span></h1>
-      <p class="hero-description">Join ISET's premier tech community. Learn, collaborate, and innovate with fellow developers using Google's cutting-edge technologies.</p>
-      <div class="cta-buttons">
+    <div class="hero-content animate-on-scroll" #heroContent>
+      <h1 class="fade-in-up delay-1">Building the Future of <span class="gradient-text">Technology Together</span></h1>
+      <p class="hero-description fade-in-up delay-2">Join ISET's premier tech community. Learn, collaborate, and innovate with fellow developers using Google's cutting-edge technologies.</p>
+      <div class="cta-buttons fade-in-up delay-3">
         <button class="primary-btn">
           <i class="fas fa-users"></i>
           Join Our Community
@@ -19,7 +19,7 @@
         </button>
       </div>
     </div>
-    <div class="scroll-indicator">
+    <div class="scroll-indicator fade-in-up delay-4">
       <span>Scroll to explore</span>
       <i class="fas fa-chevron-down"></i>
     </div>

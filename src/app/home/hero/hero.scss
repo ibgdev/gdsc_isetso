@@ -27,6 +27,30 @@ $green-light: rgba(52, 168, 83, 0.1);
   // Ensure hero takes full viewport height
   height: 100vh;
   box-sizing: border-box;
+  
+  // Initial state - elements hidden
+  opacity: 0;
+  animation: heroFadeIn 1s ease-out 0.2s forwards;
+  
+  &.loaded {
+    .floating-circles {
+      opacity: 1;
+      
+      .circle {
+        animation-play-state: running;
+      }
+    }
+    
+    .hero-content {
+      .fade-in-up {
+        animation-play-state: running;
+      }
+    }
+    
+    .scroll-indicator {
+      animation-play-state: running;
+    }
+  }
 }
 
 .floating-circles {
@@ -35,11 +59,13 @@ $green-light: rgba(52, 168, 83, 0.1);
   height: 100%;
   overflow: hidden;
   z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 
   .circle {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.2;
+    opacity: 0;
     filter: blur(30px);
     transition: all 0.5s ease;
 
@@ -96,6 +122,7 @@ $green-light: rgba(52, 168, 83, 0.1);
       background-clip: text;
       color: transparent;
       font-weight: 900;
+      transition: all 0.3s ease;
     }
   }
 }
@@ -125,9 +152,12 @@ $green-light: rgba(52, 168, 83, 0.1);
   color: #5f6368;
   font-size: 1.1rem;
   font-weight: 500;
-  animation: bounce 2s infinite;
   z-index: 2;
   width: fit-content;
+  
+  &.fade-in-up.visible {
+    animation: fadeInUp 0.8s ease-out forwards, bounce 2s infinite 1s;
+  }
   
   i {
     font-size: 1.2rem;
@@ -147,6 +177,108 @@ $green-light: rgba(52, 168, 83, 0.1);
   }
   60% {
     transform: translateY(-5px);
+  }
+}
+
+// Animation keyframes
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-10deg);
+  }
+  to {
+    opacity: 0.2;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: blur(30px);
+    transform: scale(1);
+  }
+  50% {
+    filter: blur(25px);
+    transform: scale(1.05);
+  }
+}
+
+// Animation classes
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-play-state: paused;
+  
+  &.delay-1 {
+    animation-delay: 0.2s;
+  }
+  
+  &.delay-2 {
+    animation-delay: 0.4s;
+  }
+  
+  &.delay-3 {
+    animation-delay: 0.6s;
+  }
+  
+  &.delay-4 {
+    animation-delay: 0.8s;
+  }
+  
+  &.visible {
+    animation-play-state: running;
+  }
+}
+
+.animate-on-scroll {
+  &.visible {
+    .fade-in-up {
+      animation-play-state: running;
+    }
+  }
+}
+
+.animate-on-load {
+  .circle {
+    animation: floatIn 1.2s ease-out forwards, pulseGlow 4s ease-in-out infinite;
+    animation-play-state: paused;
+    
+    &.animate-float-1 {
+      animation-delay: 0.1s, 0.5s;
+    }
+    
+    &.animate-float-2 {
+      animation-delay: 0.3s, 1s;
+    }
+    
+    &.animate-float-3 {
+      animation-delay: 0.5s, 1.5s;
+    }
+    
+    &.animate-float-4 {
+      animation-delay: 0.7s, 2s;
+    }
   }
 }
 

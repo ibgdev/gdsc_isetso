@@ -1,14 +1,13 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 
 @Component({
-  selector: 'app-hero',
+  selector: 'app-features',
   imports: [],
-  templateUrl: './hero.html',
-  styleUrl: './hero.scss'
+  templateUrl: './features.html',
+  styleUrl: './features.scss'
 })
-export class Hero implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('heroSection', { static: true }) heroSection!: ElementRef;
-  @ViewChild('heroContent', { static: true }) heroContent!: ElementRef;
+export class Features implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('featuresSection', { static: true }) featuresSection!: ElementRef;
 
   private observer!: IntersectionObserver;
 
@@ -19,6 +18,12 @@ export class Hero implements OnInit, OnDestroy, AfterViewInit {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            
+            // Trigger animations for child elements
+            const animateElements = entry.target.querySelectorAll('.fade-in-up');
+            animateElements.forEach((element: Element) => {
+              element.classList.add('visible');
+            });
           }
         });
       },
@@ -30,13 +35,10 @@ export class Hero implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Trigger initial load animations
-    setTimeout(() => {
-      this.heroSection.nativeElement.classList.add('loaded');
-    }, 100);
-
-    // Observe elements for scroll animations
-    const animateElements = this.heroSection.nativeElement.querySelectorAll('.animate-on-scroll, .fade-in-up');
+    // Observe the features section and all fade-in-up elements
+    this.observer.observe(this.featuresSection.nativeElement);
+    
+    const animateElements = this.featuresSection.nativeElement.querySelectorAll('.fade-in-up, .animate-on-scroll');
     animateElements.forEach((element: Element) => {
       this.observer.observe(element);
     });
